@@ -1,0 +1,44 @@
+@import './reset';
+@import './fonts';
+
+:root {
+	--background: rgba(255, 255, 255, 1);
+	--foreground: rgba(51, 51, 51, 1);
+	--brand: rgba(227, 31, 36, 1);
+}
+
+body {
+	@extend .montserrat-normal;
+	background-color: var(--background);
+	color: var(--foreground);
+	overflow-x: hidden;
+}
+
+.wrapper {
+	padding: 50px 56px 44px;
+	margin: 0 auto;
+	max-width: 1440px;
+	display: grid;
+	row-gap: 26px;
+	grid-template-rows: auto 1fr;
+	grid-template-columns: 1fr;
+	min-height: 100svh;
+}
+
+.content {
+	display: grid;
+	grid-template-columns: 292px 1fr;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	overflow: hidden;
+
+	> * {
+		&:not(:first-child) {
+			border-left: 1px solid rgba(222, 222, 221, 1);
+		}
+	}
+
+	main {
+		padding: 30px 22px;
+	}
+}
