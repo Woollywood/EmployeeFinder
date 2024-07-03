@@ -1,33 +1,21 @@
 <script setup lang="ts">
-	import { Employees } from '@/api';
 	import type { EmployeeInterface } from '@/interfaces/employee';
-	import { computed } from 'vue';
 
-	interface Props {
-		slug: string;
-	}
+	interface Props extends EmployeeInterface {}
 
 	const props = defineProps<Props>();
-
-	const { data } = await Employees.request().get<EmployeeInterface[]>(Employees.entity, {
-		params: {
-			username: props.slug,
-		},
-	});
-
-	const employee = computed(() => data[0]);
 </script>
 
 <template>
 	<div class="employee-detail">
 		<div class="employee-detail__image">
-			<img src="/thumbnail-big.png" :alt="employee.username" class="employee-detail__image" />
+			<img src="/thumbnail-big.png" :alt="props.username" />
 		</div>
 		<div class="employee-detail__body">
-			<h2 class="employee-detail__name">{{ employee.name }}</h2>
+			<h2 class="employee-detail__name">{{ props.name }}</h2>
 			<div class="employee-detail__subtitles">
-				<p class="employee-detail__subtitle"><strong>email:</strong> {{ employee.email }}</p>
-				<p class="employee-detail__subtitle"><strong>email:</strong> {{ employee.phone }}</p>
+				<p class="employee-detail__subtitle"><strong>email:</strong> {{ props.email }}</p>
+				<p class="employee-detail__subtitle"><strong>email:</strong> {{ props.phone }}</p>
 			</div>
 			<div class="employee-detail__description">
 				<h3 class="employee-detail__description-title">О себе:</h3>
@@ -49,10 +37,12 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 62px;
 		align-items: flex-start;
+		overflow: hidden;
 
 		&__image {
 			position: relative;
 			padding-bottom: 68%;
+			transform: scale(1.1);
 
 			img {
 				position: absolute;

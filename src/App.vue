@@ -5,6 +5,6 @@
 
 <template>
 	<DefaultLayout>
-		<RouterView />
+		<RouterView :key="$route.path" />
 	</DefaultLayout>
 </template>
