@@ -1,4 +1,4 @@
-import { computed, InjectionKey } from 'vue';
+import { InjectionKey } from 'vue';
 import { createStore, Store } from 'vuex';
 import type { EmployeeInterface } from '@/interfaces/employee';
 
