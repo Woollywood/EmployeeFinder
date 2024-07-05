@@ -33,6 +33,7 @@
 
 <style lang="scss" scoped>
 	.employee-detail {
+		align-self: flex-start;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 62px;

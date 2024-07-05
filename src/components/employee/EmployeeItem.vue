@@ -23,13 +23,17 @@
 
 <style lang="scss" scoped>
 	.employee-item {
-		height: 70px;
 		display: grid;
 		grid-template-columns: 70px 1fr;
 		background-color: var(--background);
 		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 		border-radius: 10px;
 		overflow: hidden;
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			background-color: var(--card-active-color);
+		}
 
 		&__thumbnail {
 			position: relative;
@@ -51,17 +55,26 @@
 			flex-direction: column;
 			align-items: flex-start;
 			gap: 6px;
+			overflow: hidden;
 
 			font-weight: 600;
 			font-size: 14px;
 			line-height: 18px;
-		}
+			transition: all 0.3s ease-in-out;
 
+			.router-link-active & {
+				background-color: var(--card-active-color);
+			}
+		}
 		&__firstname {
 		}
 
 		&__email {
 			color: rgba(118, 120, 125, 1);
+			width: 100%;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
 		}
 	}
 </style>

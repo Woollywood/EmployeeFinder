@@ -4,19 +4,29 @@
 
 <template>
 	<header class="header">
-		<RouterLink :to="{ name: 'home' }" class="header__logo">Жилфонд</RouterLink>
-		<span class="header__user">Пользователь</span>
+		<div class="header__container">
+			<div class="header__inner">
+				<RouterLink :to="{ name: 'home' }" class="header__logo">Жилфонд</RouterLink>
+				<span class="header__user">Пользователь</span>
+			</div>
+		</div>
 	</header>
 </template>
 
 <style lang="scss" scoped>
 	.header {
-		grid-column: span 2;
+		padding: 50px 0 26px;
+		height: var(--header-height);
 
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 56px;
+		&__container {
+		}
+
+		&__inner {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 56px;
+		}
 
 		&__logo {
 			font-weight: 700;

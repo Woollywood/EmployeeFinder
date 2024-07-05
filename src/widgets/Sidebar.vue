@@ -4,15 +4,22 @@
 	import { Employees } from '@/api';
 	import { EmployeeList } from '@/components/employee';
 	import type { EmployeeInterface } from '@/interfaces/employee';
-
 	import { useStore } from 'vuex';
 	import { key } from '@/store/employee';
+	import { useRoute, useRouter } from 'vue-router';
 
+	const route = useRoute();
+	const router = useRouter();
 	const store = useStore(key);
 
-	const employees = computed(() => store.getters.employees);
+	const employees = computed<EmployeeInterface[]>(() => store.getters.employees);
 	const isSearching = ref(false);
 	const searchText = ref('');
+	const slug = computed(() => route.params.slug);
+
+	const checkSelectedEmployees = (employees: EmployeeInterface[]) => {
+		return !!employees.find((employee) => employee.username === slug.value);
+	};
 
 	const searchSubmit = async () => {
 		isSearching.value = true;
@@ -47,9 +54,15 @@
 				`${Employees.entity}?${stringWithName}`
 			));
 
-		store.commit('setEmployees', [...(itemsWithId ?? []), ...(itemsWithNames ?? [])]);
+		const mergedArray = [...(itemsWithId ?? []), ...(itemsWithNames ?? [])];
+
+		store.commit('setEmployees', mergedArray);
 
 		isSearching.value = false;
+
+		if (!checkSelectedEmployees(mergedArray)) {
+			router.push({ name: 'home' });
+		}
 	};
 </script>
 
@@ -69,6 +82,8 @@
 <style lang="scss" scoped>
 	.sidebar {
 		padding: 28px 24px;
+		max-height: calc(100svh - var(--header-height));
+		overflow-y: auto;
 
 		&__item {
 			&:not(:last-child) {
